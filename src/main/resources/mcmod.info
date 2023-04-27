@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dregoratp",
+  "name": "DregoraTp",
+  "description": "Addon mod for the Backrooms Ultimate Edition 1.12.2.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["NLBlackEagle"],
+  "credits": "NLBlackEagle",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
