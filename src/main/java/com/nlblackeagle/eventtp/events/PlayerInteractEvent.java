@@ -15,7 +15,11 @@ import java.util.stream.Collectors;
 
 import static com.nlblackeagle.eventtp.config.ConfigHandler.*;
 
+
 public class PlayerInteractEvent {
+
+    public static boolean BACKROOMS_DOOR_FIX = false;
+
 
     @SubscribeEvent
     public void playerInteractEvent(net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
@@ -34,10 +38,22 @@ public class PlayerInteractEvent {
         String[] words = DIM_D.split(",");
 
 
+
         if (event.getEntityLiving() instanceof EntityPlayer) {
 
             int index = -1;
 
+
+            // Backrooms Door fix
+            //----------------------------------------------------------------
+            String DoorFixUpper = ("Block{backrooms:metal_maintenance_door_block_top}");
+            String DoorFixLower = ("Block{backrooms:metal_maintenance_door_block_bottom}");
+
+            if ((BlockMaterial.toString().equals(DoorFixUpper)) || (BlockMaterial.toString().equals(DoorFixLower))) {
+                // passed to suffocation event in LivingHurtEvent.class
+                BACKROOMS_DOOR_FIX = true;
+            }
+            //----------------------------------------------------------------
 
             for (String x : words) {
 
