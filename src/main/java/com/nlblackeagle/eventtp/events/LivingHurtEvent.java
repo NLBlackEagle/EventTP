@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.nlblackeagle.eventtp.config.ConfigHandler.*;
+import static com.nlblackeagle.eventtp.events.PlayerInteractEvent.BACKROOMS_DOOR_FIX;
 
 
 public class LivingHurtEvent
@@ -25,6 +26,7 @@ public class LivingHurtEvent
 
 
             int dimID = player.getEntityWorld().provider.getDimension();
+            String mobString = event.getSource().getDamageType();
             List<Integer> DIM_B = Arrays.stream(DIMENSION_BLACKLIST.split(",")).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
             List<Integer> DIM_C = Arrays.stream(DIMENSION_COORDINATES.split(",")).map(x -> Integer.parseInt(x.trim())).collect(Collectors.toList());
 
@@ -43,10 +45,15 @@ public class LivingHurtEvent
                 }
             }
 
+            if ((mobString.equals("inWall")) && (BACKROOMS_DOOR_FIX)) {
+                CustomTeleport.teleportToDimension(player, 1001, 0.5, 62, 0.5);
+                BACKROOMS_DOOR_FIX = false;
+            }
+
 
             if (found) {
 
-                String mobString = event.getSource().getDamageType();
+
 
                 List<String> ar = new ArrayList<>();
                 List<Integer> arNum = new ArrayList<>();
